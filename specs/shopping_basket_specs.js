@@ -4,12 +4,6 @@ var itemFactory = require('../item_factory');
 
 describe( "Shopping Basket", function() {
 
-  var bananas = null;
-
-  beforeEach( function() {
-    bananas = itemFactory.getItem( "Bananas" );
-  });
-
   it( "should start with totalPrice of 0.00", function() {
     assert.equal( 0.00, shoppingBasket.totalPrice() );
   });
@@ -19,6 +13,7 @@ describe( "Shopping Basket", function() {
   });
 
   it( "should increase itemCount when item is added", function() {
+    var bananas = itemFactory.getItem( "Bananas" );
     shoppingBasket.addItem( bananas );
     assert.equal( 1, shoppingBasket.itemCount() );
   });
