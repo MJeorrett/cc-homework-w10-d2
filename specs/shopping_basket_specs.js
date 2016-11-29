@@ -21,4 +21,11 @@ describe( "Shopping Basket", function() {
   it( "should have totalPrice of 0.99 after adding bananas", function() {
     assert.equal( 0.99, shoppingBasket.totalPrice() );
   });
+
+  it( "totalPrice is 5.99 and itemCont is 2 after adding Cheese", function() {
+    var cheese = itemFactory.getItem( "Cheese" );
+    shoppingBasket.addItem( cheese );
+    assert.equal( 5.99, shoppingBasket.totalPrice() );
+    assert.equal( 2, shoppingBasket.itemCount() );
+  });
 });
