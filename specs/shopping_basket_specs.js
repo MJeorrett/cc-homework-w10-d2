@@ -71,6 +71,16 @@ describe( "Shopping Basket", function() {
     assert.equal( 1, shoppingBasket.itemCount() );
   });
 
+  it( "should not decrease totalPrice or itemCount when item removed is not found", function() {
+    shoppingBasket.empty();
+    shoppingBasket.addItem( bananas );
+    shoppingBasket.addItem( cheese );
+
+    shoppingBasket.removeItemByName( "Turkey" );
+    assert.equal( 5.99, shoppingBasket.totalPrice() );
+    assert.equal( 2, shoppingBasket.itemCount() );
+  });
+
   it( "should apply 10% discount when total price is over 20", function() {
     shoppingBasket.empty();
     shoppingBasket.addItem( bananas );

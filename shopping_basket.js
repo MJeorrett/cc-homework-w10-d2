@@ -53,7 +53,10 @@ var shoppingBasket = {
       }
     }
 
-    this.items.splice( itemIndex, 1 );
+    if ( itemIndex !== -1 ) {
+      
+      this.items.splice( itemIndex, 1 );
+    }
   },
   empty: function() {
     this.items = [];
