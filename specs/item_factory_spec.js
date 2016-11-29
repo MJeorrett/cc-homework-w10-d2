@@ -45,4 +45,10 @@ describe( "ItemFactory", function() {
     assert.equal( "Sausages", cheese.name );
     assert.equal( 4.15, cheese.price );
   });
+
+  it( "should return object with name 'Turkey' and price 12.99 when asked for 'Turkey'", function() {
+    var cheese = itemFactory.getItem( "Turkey" );
+    assert.equal( "Turkey", cheese.name );
+    assert.equal( 12.99, cheese.price );
+  });
 });
