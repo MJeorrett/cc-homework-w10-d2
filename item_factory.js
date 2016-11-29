@@ -1,11 +1,12 @@
 var arrayIncludes = require('array-includes')
 
 var itemFactory = {
-  itemNames: [ "Bananas", "Cheese", "Bacon" ],
+  itemNames: [ "Bananas", "Cheese", "Bacon", "Sausages" ],
   itemCosts: {
     Bananas: 0.99,
     Cheese: 5.00,
-    Bacon: 3.50
+    Bacon: 3.50,
+    Sausages: 4.15
   },
   getItem: function( itemName ) {
 
