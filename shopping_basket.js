@@ -1,7 +1,14 @@
 var shoppingBasket = {
   items: [],
   totalPrice: function() {
-    return 0.00;
+    var total = 0.00;
+
+    for ( var item of this.items ) {
+
+      total += item.price;
+    }
+
+    return total;
   },
   itemCount: function() {
     return this.items.length;
