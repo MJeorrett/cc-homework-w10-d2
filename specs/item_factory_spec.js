@@ -28,6 +28,12 @@ describe( "ItemFactory", function() {
     assert.equal( 0.99, bananas.price );
   })
 
+  it( "should return object with bogof === false when asked for Bananas", function() {
+    var result = bananas.bogof;
+    assert.equal( 'boolean', typeof( result ) );
+    assert.equal( false, result );
+  });
+
   it( "should return object with name 'Cheese' and price 5.00 when asked for 'Cheese'", function() {
     var cheese = itemFactory.getItem( "Cheese" );
     assert.equal( "Cheese", cheese.name );

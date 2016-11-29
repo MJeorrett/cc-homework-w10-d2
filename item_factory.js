@@ -2,7 +2,7 @@ var arrayIncludes = require('array-includes')
 
 var itemFactory = {
   items: {
-    Bananas: { name: "Bananas", price: 0.99 },
+    Bananas: { name: "Bananas", price: 0.99, bogof: false },
     Cheese: { name: "Cheese", price: 5.00 },
     Bacon: { name: "Bacon", price: 3.50 },
     Sausages: { name: "Sausages", price: 4.15 },
