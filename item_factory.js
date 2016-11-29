@@ -1,5 +1,3 @@
-var arrayIncludes = require('array-includes')
-
 var itemFactory = {
   items: {
     Bananas: { name: "Bananas", price: 0.99, bogof: false },

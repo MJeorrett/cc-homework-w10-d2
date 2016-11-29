@@ -3,8 +3,22 @@ var shoppingBasket = {
   totalPrice: function( applyLoyaltyDiscount ) {
     var total = 0.00;
 
+    var paidForItemNames = [];
+    var indexOfItem = null;
+
     for ( var item of this.items ) {
-      total += item.price;
+
+      indexOfItem = paidForItemNames.indexOf( item.name );
+
+      if ( indexOfItem === -1 ) {
+
+        total += item.price;
+        paidForItemNames.push( item.name );
+
+      } else {
+
+        paidForItemNames.splice( indexOfItem, 1 );
+      }
     }
 
     if ( total > 20.00 ) {

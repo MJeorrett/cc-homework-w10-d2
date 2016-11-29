@@ -64,4 +64,11 @@ describe( "Shopping Basket", function() {
   it( "should apply loyalty discount after bulk discount", function() {
     assert.equal( 22.77, shoppingBasket.totalPrice( true ) );
   });
+
+  it( "should not count second item in totalPrice when two items with same name are added", function() {
+    shoppingBasket.empty();
+    shoppingBasket.addItem( itemFactory.getItem( "Bananas" ) );
+    shoppingBasket.addItem( itemFactory.getItem( "Bananas" ) );
+    assert.equal( 0.99, shoppingBasket.totalPrice() );
+  });
 });
