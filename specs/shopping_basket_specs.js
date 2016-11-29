@@ -71,4 +71,9 @@ describe( "Shopping Basket", function() {
     shoppingBasket.addItem( itemFactory.getItem( "Bananas" ) );
     assert.equal( 0.99, shoppingBasket.totalPrice() );
   });
+
+  it( "should charge for two items when three of the same type are added", function() {
+    shoppingBasket.addItem( itemFactory.getItem( "Bananas" ) );
+    assert.equal( 1.98, shoppingBasket.totalPrice() );
+  });
 });
