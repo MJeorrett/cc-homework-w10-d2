@@ -32,7 +32,7 @@ describe( "Shopping Basket", function() {
     assert.equal( 2, shoppingBasket.itemCount() );
   });
 
-  it( "totalPrice with loyalty discount is 5.69", function() {
+  it( "should return 5.69 from totalPrice when passed true", function() {
     assert.equal( 5.69, shoppingBasket.totalPrice( true ) );
   });
 });
