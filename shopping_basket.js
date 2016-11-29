@@ -4,7 +4,6 @@ var shoppingBasket = {
     var total = 0.00;
 
     for ( var item of this.items ) {
-
       total += item.price;
     }
 
