@@ -1,11 +1,13 @@
 var shoppingBasket = {
+  items: [],
   totalPrice: function() {
-
     return 0.00;
   },
   itemCount: function() {
-
-    return 0;
+    return this.items.length;
+  },
+  addItem: function( itemToAdd ) {
+    this.items.push( itemToAdd );
   }
 };
 
