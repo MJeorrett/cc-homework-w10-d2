@@ -44,4 +44,10 @@ describe( "Shopping Basket", function() {
   it( "should decrease totalPrice when item removed successfully", function() {
     assert.equal( 5.00, shoppingBasket.totalPrice() );
   });
+
+  it( "should have 0 itemCount and 0 totalPrice when emptied", function() {
+    shoppingBasket.empty();
+    assert.equal( 0, shoppingBasket.itemCount() );
+    assert.equal( 0.00, shoppingBasket.totalPrice() );
+  })
 });

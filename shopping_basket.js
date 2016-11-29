@@ -35,6 +35,9 @@ var shoppingBasket = {
     }
 
     this.items.splice( itemIndex, 1 );
+  },
+  empty: function() {
+    this.items = [];
   }
 };
 
