@@ -80,4 +80,18 @@ describe( "Shopping Basket", function() {
   it( "should calculate loyalty after bogof", function() {
     assert.equal( 1.88, shoppingBasket.totalPrice( true ) );
   });
+
+  it( "should calculate complex basket", function() {
+    shoppingBasket.empty();
+    shoppingBasket.addItem( itemFactory.getItem( "Bananas" ) );
+    shoppingBasket.addItem( itemFactory.getItem( "Bananas" ) );
+    shoppingBasket.addItem( itemFactory.getItem( "Cheese" ) );
+    shoppingBasket.addItem( itemFactory.getItem( "Cheese" ) );
+    shoppingBasket.addItem( itemFactory.getItem( "Cheese" ) );
+    shoppingBasket.addItem( itemFactory.getItem( "Bacon" ) );
+    shoppingBasket.addItem( itemFactory.getItem( "Sausages" ) );
+    shoppingBasket.addItem( itemFactory.getItem( "Turkey" ) );
+
+    assert.equal( 27.04, shoppingBasket.totalPrice( true ) );
+  });
 });
