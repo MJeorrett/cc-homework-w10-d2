@@ -19,6 +19,22 @@ var shoppingBasket = {
   },
   addItem: function( itemToAdd ) {
     this.items.push( itemToAdd );
+  },
+  removeItemByName: function( itemName ) {
+
+    var item = null;
+    var itemIndex = -1;
+
+    for ( var i = 0; i < this.items.length; i++ ) {
+
+      item = this.items[i];
+      if ( item.name === itemName ) {
+
+        itemIndex = i;
+      }
+    }
+
+    this.items.splice( itemIndex, 1 );
   }
 };
 

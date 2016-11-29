@@ -35,4 +35,13 @@ describe( "Shopping Basket", function() {
   it( "should return 5.69 from totalPrice when passed true", function() {
     assert.equal( 5.69, shoppingBasket.totalPrice( true ) );
   });
+
+  it( "should decrease itemCount when item removed successfully", function() {
+    shoppingBasket.removeItemByName( "Bananas" );
+    assert.equal( 1, shoppingBasket.itemCount() );
+  });
+
+  it( "should decrease totalPrice when item removed successfully", function() {
+    assert.equal( 5.00, shoppingBasket.totalPrice() );
+  });
 });
