@@ -20,8 +20,11 @@ describe( "ItemFactory", function() {
     assert.equal( "undefined", typeof( actual ) );
   });
 
-  it( "bananas should have name bananas", function() {
-
+  it( "should return object with name 'Bananas' when asked for Bananas", function() {
     assert.equal( "Bananas", bananas.name );
   });
+
+  it( "should return object with price 0.99 when asked for Bananas", function() {
+    assert.equal( 0.99, bananas.price );
+  })
 });
