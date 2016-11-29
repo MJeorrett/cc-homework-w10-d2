@@ -60,4 +60,8 @@ describe( "Shopping Basket", function() {
 
     assert.equal( 23.97, shoppingBasket.totalPrice() );
   });
+
+  it( "should apply loyalty discount after bulk discount", function() {
+    assert.equal( 22.77, shoppingBasket.totalPrice( true ) );
+  });
 });
