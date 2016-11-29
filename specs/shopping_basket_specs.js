@@ -26,8 +26,13 @@ describe( "Shopping Basket", function() {
     var cheese = itemFactory.getItem( "Cheese" );
     shoppingBasket.addItem( cheese );
     assert.equal( 5.99, shoppingBasket.totalPrice() );
+  });
 
   it( "should have itemCount of 2 after addding cheese" , function() {
     assert.equal( 2, shoppingBasket.itemCount() );
+  });
+
+  it( "totalPrice with loyalty discount is 5.69", function() {
+    assert.equal( 5.69, shoppingBasket.totalPrice( true ) );
   });
 });
