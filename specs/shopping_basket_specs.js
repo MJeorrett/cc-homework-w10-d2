@@ -49,5 +49,15 @@ describe( "Shopping Basket", function() {
     shoppingBasket.empty();
     assert.equal( 0, shoppingBasket.itemCount() );
     assert.equal( 0.00, shoppingBasket.totalPrice() );
-  })
+  });
+
+  it( "should apply 10% discount when total price is over 20", function() {
+    shoppingBasket.addItem( itemFactory.getItem( "Bananas" ) );
+    shoppingBasket.addItem( itemFactory.getItem( "Cheese" ) );
+    shoppingBasket.addItem( itemFactory.getItem( "Bacon" ) );
+    shoppingBasket.addItem( itemFactory.getItem( "Sausages" ) );
+    shoppingBasket.addItem( itemFactory.getItem( "Turkey" ) );
+
+    assert.equal( 23.97, shoppingBasket.totalPrice() );
+  });
 });

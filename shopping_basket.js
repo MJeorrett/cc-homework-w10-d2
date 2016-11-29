@@ -7,12 +7,17 @@ var shoppingBasket = {
       total += item.price;
     }
 
-    if ( applyLoyaltyDiscount ) {
+    if ( total > 20.00 ) {
 
-      total = (total * 0.95).toFixed( 2 );
+      total = total * 0.9;
     }
 
-    return total;
+    if ( applyLoyaltyDiscount ) {
+
+      total = (total * 0.95);
+    }
+
+    return total.toFixed( 2 );
   },
   itemCount: function() {
     return this.items.length;
