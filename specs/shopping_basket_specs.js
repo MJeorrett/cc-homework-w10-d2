@@ -22,10 +22,12 @@ describe( "Shopping Basket", function() {
     assert.equal( 0.99, shoppingBasket.totalPrice() );
   });
 
-  it( "totalPrice is 5.99 and itemCont is 2 after adding Cheese", function() {
+  it( "should return 5.99 from totalPrice after adding cheese", function() {
     var cheese = itemFactory.getItem( "Cheese" );
     shoppingBasket.addItem( cheese );
     assert.equal( 5.99, shoppingBasket.totalPrice() );
+
+  it( "should have itemCount of 2 after addding cheese" , function() {
     assert.equal( 2, shoppingBasket.itemCount() );
   });
 });
