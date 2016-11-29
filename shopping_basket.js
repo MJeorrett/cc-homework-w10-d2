@@ -1,35 +1,53 @@
+function sumItemsWithBogOf( items ) {
+  var total = 0.00;
+
+  var paidForItemNames = [];
+  var indexOfItem = null;
+
+  for ( var item of items ) {
+
+    indexOfItem = paidForItemNames.indexOf( item.name );
+
+    if ( indexOfItem === -1 ) {
+
+      total += item.price;
+      paidForItemNames.push( item.name );
+
+    } else {
+
+      paidForItemNames.splice( indexOfItem, 1 );
+    }
+  }
+
+  return total;
+}
+
+var discounter = {
+  discountThreshold: 20.00,
+  bulkDiscountPercentage: 0.10,
+  loyaltyDiscountPercentage: 0.05,
+  applyLoyaltyDiscount: false,
+  apply: function( total ) {
+
+    if ( total > this.discountThreshold ) {
+      total -= total * this.bulkDiscountPercentage;
+    }
+
+    if ( this.applyLoyaltyDiscount ) {
+      total -= total * this.loyaltyDiscountPercentage;
+    }
+
+    return total;
+  }
+}
+
 var shoppingBasket = {
   items: [],
-  totalPrice: function( applyLoyaltyDiscount ) {
-    var total = 0.00;
+  totalPrice: function( loyaltyCardHeld ) {
 
-    var paidForItemNames = [];
-    var indexOfItem = null;
-
-    for ( var item of this.items ) {
-
-      indexOfItem = paidForItemNames.indexOf( item.name );
-
-      if ( indexOfItem === -1 ) {
-
-        total += item.price;
-        paidForItemNames.push( item.name );
-
-      } else {
-
-        paidForItemNames.splice( indexOfItem, 1 );
-      }
-    }
-
-    if ( total > 20.00 ) {
-
-      total = total * 0.9;
-    }
-
-    if ( applyLoyaltyDiscount ) {
-
-      total = (total * 0.95);
-    }
+    var total = sumItemsWithBogOf( this.items );
+    discounter.applyLoyaltyDiscount = loyaltyCardHeld;
+    total = discounter.apply( total );
 
     return total.toFixed( 2 );
   },
@@ -54,7 +72,7 @@ var shoppingBasket = {
     }
 
     if ( itemIndex !== -1 ) {
-      
+
       this.items.splice( itemIndex, 1 );
     }
   },
