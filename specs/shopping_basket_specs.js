@@ -4,6 +4,20 @@ var itemFactory = require('../item_factory');
 
 describe( "Shopping Basket", function() {
 
+  var bananas = null;
+  var cheese = null;
+  var bacon = null;
+  var sausages = null;
+  var turkey = null;
+
+  beforeEach( function() {
+    bananas = itemFactory.getItem( "Bananas" );
+    cheese = itemFactory.getItem( "Cheese" );
+    bacon = itemFactory.getItem( "Bacon" );
+    sausages = itemFactory.getItem( "Sausages" );
+    turkey = itemFactory.getItem( "Turkey" );
+  });
+
   it( "should start with totalPrice of 0.00", function() {
     assert.equal( 0.00, shoppingBasket.totalPrice() );
   });
@@ -12,85 +26,106 @@ describe( "Shopping Basket", function() {
     assert.equal( 0, shoppingBasket.itemCount() );
   });
 
-  it( "should increase itemCount when item is added", function() {
-    var bananas = itemFactory.getItem( "Bananas" );
-    shoppingBasket.addItem( bananas );
-    assert.equal( 1, shoppingBasket.itemCount() );
-  });
-
-  it( "should have totalPrice of 0.99 after adding bananas", function() {
-    assert.equal( 0.99, shoppingBasket.totalPrice() );
-  });
-
-  it( "should return 5.99 from totalPrice after adding cheese", function() {
-    var cheese = itemFactory.getItem( "Cheese" );
-    shoppingBasket.addItem( cheese );
-    assert.equal( 5.99, shoppingBasket.totalPrice() );
-  });
-
-  it( "should have itemCount of 2 after addding cheese" , function() {
-    assert.equal( 2, shoppingBasket.itemCount() );
-  });
-
-  it( "should return 5.69 from totalPrice when passed true", function() {
-    assert.equal( 5.69, shoppingBasket.totalPrice( true ) );
-  });
-
-  it( "should decrease itemCount when item removed successfully", function() {
-    shoppingBasket.removeItemByName( "Bananas" );
-    assert.equal( 1, shoppingBasket.itemCount() );
-  });
-
-  it( "should decrease totalPrice when item removed successfully", function() {
-    assert.equal( 5.00, shoppingBasket.totalPrice() );
-  });
-
   it( "should have 0 itemCount and 0 totalPrice when emptied", function() {
+    shoppingBasket.addItem( bananas );
+    shoppingBasket.addItem( cheese );
     shoppingBasket.empty();
     assert.equal( 0, shoppingBasket.itemCount() );
     assert.equal( 0.00, shoppingBasket.totalPrice() );
   });
 
+  it( "should increase itemCount when item is added", function() {
+    shoppingBasket.empty();
+    shoppingBasket.addItem( bananas );
+    assert.equal( 1, shoppingBasket.itemCount() );
+  });
+
+  it( "should have totalPrice of 0.99 after adding bananas", function() {
+    shoppingBasket.empty();
+    shoppingBasket.addItem( bananas );
+    assert.equal( 0.99, shoppingBasket.totalPrice() );
+  });
+
+  it( "should have totalPrice 5.99 and itemCount 2 after adding bananas and cheese", function() {
+    shoppingBasket.empty();
+    shoppingBasket.addItem( bananas );
+    shoppingBasket.addItem( cheese );
+    assert.equal( 5.99, shoppingBasket.totalPrice() );
+    assert.equal( 2, shoppingBasket.itemCount() );
+  });
+
+  it( "should discount by 5% when true passed to totalPrice", function() {
+    shoppingBasket.empty();
+    shoppingBasket.addItem( bananas );
+    shoppingBasket.addItem( cheese );
+    assert.equal( 5.69, shoppingBasket.totalPrice( true ) );
+  });
+
+  it( "should decrease totalPrice and itemCount when item removed successfully", function() {
+    shoppingBasket.empty();
+    shoppingBasket.addItem( bananas );
+    shoppingBasket.addItem( cheese );
+
+    shoppingBasket.removeItemByName( "Bananas" );
+    assert.equal( 5.00, shoppingBasket.totalPrice() );
+    assert.equal( 1, shoppingBasket.itemCount() );
+  });
+
   it( "should apply 10% discount when total price is over 20", function() {
-    shoppingBasket.addItem( itemFactory.getItem( "Bananas" ) );
-    shoppingBasket.addItem( itemFactory.getItem( "Cheese" ) );
-    shoppingBasket.addItem( itemFactory.getItem( "Bacon" ) );
-    shoppingBasket.addItem( itemFactory.getItem( "Sausages" ) );
-    shoppingBasket.addItem( itemFactory.getItem( "Turkey" ) );
+    shoppingBasket.empty();
+    shoppingBasket.addItem( bananas );
+    shoppingBasket.addItem( cheese );
+    shoppingBasket.addItem( bacon );
+    shoppingBasket.addItem( sausages );
+    shoppingBasket.addItem( turkey );
 
     assert.equal( 23.97, shoppingBasket.totalPrice() );
   });
 
-  it( "should apply loyalty discount after bulk discount", function() {
+  it( "should apply loyalty discount and bulk discount", function() {
+    shoppingBasket.empty();
+    shoppingBasket.addItem( bananas );
+    shoppingBasket.addItem( cheese );
+    shoppingBasket.addItem( bacon );
+    shoppingBasket.addItem( sausages );
+    shoppingBasket.addItem( turkey );
+
     assert.equal( 22.77, shoppingBasket.totalPrice( true ) );
   });
 
   it( "should not count second item in totalPrice when two items with same name are added", function() {
     shoppingBasket.empty();
-    shoppingBasket.addItem( itemFactory.getItem( "Bananas" ) );
-    shoppingBasket.addItem( itemFactory.getItem( "Bananas" ) );
+    shoppingBasket.addItem( bananas );
+    shoppingBasket.addItem( bananas );
     assert.equal( 0.99, shoppingBasket.totalPrice() );
   });
 
   it( "should charge for two items when three of the same type are added", function() {
-    shoppingBasket.addItem( itemFactory.getItem( "Bananas" ) );
+    shoppingBasket.empty();
+    shoppingBasket.addItem( bananas );
+    shoppingBasket.addItem( bananas );
+    shoppingBasket.addItem( bananas );
     assert.equal( 1.98, shoppingBasket.totalPrice() );
   });
 
   it( "should calculate loyalty after bogof", function() {
+    shoppingBasket.empty();
+    shoppingBasket.addItem( bananas );
+    shoppingBasket.addItem( bananas );
+    shoppingBasket.addItem( bananas );
     assert.equal( 1.88, shoppingBasket.totalPrice( true ) );
   });
 
   it( "should calculate complex basket", function() {
     shoppingBasket.empty();
-    shoppingBasket.addItem( itemFactory.getItem( "Bananas" ) );
-    shoppingBasket.addItem( itemFactory.getItem( "Bananas" ) );
-    shoppingBasket.addItem( itemFactory.getItem( "Cheese" ) );
-    shoppingBasket.addItem( itemFactory.getItem( "Cheese" ) );
-    shoppingBasket.addItem( itemFactory.getItem( "Cheese" ) );
-    shoppingBasket.addItem( itemFactory.getItem( "Bacon" ) );
-    shoppingBasket.addItem( itemFactory.getItem( "Sausages" ) );
-    shoppingBasket.addItem( itemFactory.getItem( "Turkey" ) );
+    shoppingBasket.addItem( bananas );
+    shoppingBasket.addItem( bananas );
+    shoppingBasket.addItem( cheese );
+    shoppingBasket.addItem( cheese );
+    shoppingBasket.addItem( cheese );
+    shoppingBasket.addItem( bacon );
+    shoppingBasket.addItem( sausages );
+    shoppingBasket.addItem( turkey );
 
     assert.equal( 27.04, shoppingBasket.totalPrice( true ) );
   });
