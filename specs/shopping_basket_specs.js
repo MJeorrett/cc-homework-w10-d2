@@ -76,4 +76,8 @@ describe( "Shopping Basket", function() {
     shoppingBasket.addItem( itemFactory.getItem( "Bananas" ) );
     assert.equal( 1.98, shoppingBasket.totalPrice() );
   });
+
+  it( "should calculate loyalty after bogof", function() {
+    assert.equal( 1.88, shoppingBasket.totalPrice( true ) );
+  });
 });
